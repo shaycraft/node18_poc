@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "aws-sdk": "^2.1485.0"
+    "aws-sdk": "^2.1485.0",
+    "prettier": "^3.0.3"
   }
 }
