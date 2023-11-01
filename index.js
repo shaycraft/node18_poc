@@ -13,13 +13,14 @@ export async function handler() {
       })
       .promise();
 
-    console.debug("results = ");
-    console.debug(results);
+    return {
+      statusCode: 200,
+      body: JSON.stringify(AWS.DynamoDB.Converter.unmarshall(results.Item)),
+    };
   } catch (err) {
     console.debug("ERROR!!!!");
     console.debug(err);
   }
 }
 
-// module.exports.handler();
-handler();
+handler().then((data) => console.debug(data));
