@@ -1,22 +1,41 @@
-import * as AWS from "aws-sdk";
+import { default as AWS } from "aws-sdk";
 
-exports.handler = async () => {
+export async function handler() {
   console.debug("wazzup!!!");
-  const client = new AWS.DynamoDB.DocumentClient();
+  // console.debug(AWS.default.DynamoDB);
+  const client = new AWS.DynamoDB();
 
   try {
-    const results = await client.get({
-      TableName: "Attachments",
-      Key: {
-        REC_ID: "01H59D67PV21TDNK9Z5K5ACZJ3",
+    console.debug(Object.keys(client));
+    const results = client.getItem(
+      {
+        TableName: "Attachments",
+        Key: {
+          REC_ID: { S: "01H59D67PV21TDNK9Z5K5ACZJ3" },
+        },
       },
-    });
+      function (err, data) {
+        if (err) {
+          console.debug("WE HAD ERRRO!!!!");
+          console.debug(err);
+        } else {
+          console.debug("Data is... ");
+          console.debug(data);
+        }
+      },
+    );
 
-    console.debug(results.json());
+    // console.debug(results);
+    // console.debug(Object.keys(results.response));
+    // console.debug(results.response);
+    // console.debug(results);
+    console.debug(AWS.DynamoDB.Converter.marshall({ foo: "bar" }));
+    // console.debug(Object.keys(AWS));
   } catch (err) {
     console.debug("ERROR!!!!");
     console.debug(err);
   }
-};
+}
 
 // module.exports.handler();
+handler();
