@@ -1,4 +1,4 @@
-import { default as AWS } from "aws-sdk";
+import { default as AWS } from 'aws-sdk';
 
 export async function handler() {
   const client = new AWS.DynamoDB();
@@ -6,9 +6,9 @@ export async function handler() {
   try {
     const results = await client
       .getItem({
-        TableName: "Attachments",
+        TableName: 'Attachments',
         Key: AWS.DynamoDB.Converter.marshall({
-          REC_ID: "01H59D67PV21TDNK9Z5K5ACZJ3",
+          REC_ID: '01H59D67PV21TDNK9Z5K5ACZJ3',
         }),
       })
       .promise();
@@ -18,7 +18,7 @@ export async function handler() {
       body: JSON.stringify(AWS.DynamoDB.Converter.unmarshall(results.Item)),
     };
   } catch (err) {
-    console.debug("ERROR!!!!");
+    console.debug('ERROR!!!!');
     console.debug(err);
   }
 }
