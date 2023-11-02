@@ -20,6 +20,11 @@ export async function handler() {
   } catch (err) {
     console.debug('ERROR!!!!');
     console.debug(err);
+
+    return {
+      statusCode: 500,
+      body: err.message,
+    };
   }
 }
 
